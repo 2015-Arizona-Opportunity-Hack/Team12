@@ -47,6 +47,7 @@ router.post('/', function(req, res) {
 router.get('/', function(req, res) {
 
     var results = [];
+    var interests=[];
     var getemailid=req.query.emailid;
 
     // Get a Postgres client from the connection pool
@@ -65,11 +66,17 @@ router.get('/', function(req, res) {
         query.on('row', function(row) {
             results.push(row);
         });
+        query = client.query("SELECT user_interests FROM user_interests where emailid=($1)",[getemailid]);
 
+        // Stream results back one row at a time
+
+        query.on('row', function(row) {
+            interests.push(row);
+        });
         // After all data is returned, close connection and return results
         query.on('end', function() {
             done();
-            return res.json(results);
+            return res.json(results.concat(interests));
         });
 
     });
