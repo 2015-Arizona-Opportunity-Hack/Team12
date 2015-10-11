@@ -22,6 +22,7 @@ router.post('/', function(req, res) {
 
         // SQL Query > Insert Data
         for(k in data.interests){
+          console.log(k);
           client.query("INSERT INTO user_interests(emailid,user_interests) values ($1,$2)",[data.emailid, data.interests[k]]);
         }
 

@@ -78,4 +78,29 @@ router.get('/', function(req, res) {
 
 });
 
+router.route('/:event_id')
+  .get(function(req, res){
+    results = [];
+
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+
+    var query = client.query("select * from events where eventid = ($1)", [req.params.event_id]);
+
+    query.on('row', function(row) {
+        results.push(row);
+    });
+    query.on('end', function() {
+        done();
+        return res.json(results);
+      });
+    });
+  });
+
 module.exports = router;
