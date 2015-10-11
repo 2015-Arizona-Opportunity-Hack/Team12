@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     var pastresults = [];
     var eventids = [];
     var getemailid = req.query.emailid;
-
+    var resultstype = req.query.resultstype;
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -22,12 +22,21 @@ router.get('/', function(req, res) {
 
         // SQL Query > Select Data
         //console.log(getemailid)
+        if(resultstype === "future"){
        var query = client.query("select * from events where eventid in (select eventid from user_events where emailid like ($1)) and eventdate>now()",[getemailid]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
             futureresults.push(row);
         });
+
+        query.on('end', function() {
+              done();
+              return res.json(futureresults);
+
+          });
+
+      }
        //console.log("eventids follow");
         //console.log(futureresults);
 
@@ -39,16 +48,21 @@ router.get('/', function(req, res) {
             futureresults.push(row);
         });*/
         //console.log(futureresults);
-       query = client.query("select type,count(*) from events group by type having type in (select type from events where eventid in (select eventid from user_events where emailid like ($1)) and eventdate<now())", [getemailid]);
-        query.on('row', function(row) {
-            pastresults.push(row);
-        });
-        // After all data is returned, close connection and return results
-      query.on('end', function() {
-            done();
-            return res.json(futureresults.concat(pastresults));
-        });
 
+        else if (resultstype==="past") {
+
+           var query = client.query("select type,count(*) from events group by type having type in (select type from events where eventid in (select eventid from user_events where emailid like ($1)) and eventdate<now())", [getemailid]);
+            query.on('row', function(row) {
+                pastresults.push(row);
+            });
+            // After all data is returned, close connection and return results
+
+          query.on('end', function() {
+                done();
+                return res.json(pastresults);
+
+            });
+        }
     });
 
 });
