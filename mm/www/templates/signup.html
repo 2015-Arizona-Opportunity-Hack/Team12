@@ -1,0 +1,44 @@
+<ion-view view-title="Signup">
+   <ion-content>
+       <div class="list">
+           <label class="item item-input">
+               <input type="text" placeholder="First Name" ng-model="data.firstname">
+           </label> 
+           <label class="item item-input" >
+               <input type="text" placeholder="Last Name" ng-model="data.lastname">
+           </label>
+           <label class="item item-input">
+               <input type="email" placeholder="Email" ng-model="data.emailid"> 
+           </label>
+           <label class="item item-input">
+               <input type="tel" placeholder="Telephone Number" ng-model="data.phone">
+           </label>
+           <label class="item item-input">
+               <input type="date" placeholder="Date of Birth" ng-model="data.dob">
+           </label>
+           <label class="item item-input">
+               <input type="text" placeholder="Address Line-1" ng-model="data.addressline1">
+           </label>
+           <label class="item item-input">
+               <input type="text" placeholder="Address Line-2" ng-model="data.addressline2">
+           </label>
+           <label class="item item-input">
+               <input type="text" placeholder="City" ng-model="data.city">
+           </label>
+           <label class="item item-input">
+               <input type="text" placeholder="State" ng-model="data.state">
+           </label>
+           <label class="item item-input">
+               <input type="number" placeholder="Zip Code" ng-model="data.zip">
+           </label>
+
+           <label class="item item-input">
+               <input type="password" placeholder="Password" ng-model="data.password">
+           </label>
+           <button class="button button-block button-positive" on-tap="signup()">
+               Sign Up
+           </button>
+
+       </div>
+   </ion-content>
+</ion-view>

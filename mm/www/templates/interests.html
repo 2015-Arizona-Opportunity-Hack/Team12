@@ -1,0 +1,47 @@
+<ion-view view-title="Interested in ">
+   <ion-content>
+       <ul class="list">
+
+           <li class="item item-checkbox" ng-repeat='interest in interestsList'>
+               <label class="checkbox">
+                   <input type="checkbox" ng-click = 'toggleSelection(interest)'>
+
+               </label>
+                {{interest}}               
+           </li>
+ <!--           <li class="item item-checkbox">
+               <label class="checkbox">
+                   <input type="checkbox" ng-model="interestsData.scholarships">
+               </label>
+               Scholarships
+           </li>
+           <li class="item item-checkbox">
+               <label class="checkbox">
+                   <input type="checkbox" ng-model="interestsData.shopnSupport">
+               </label>
+               Shop and Support
+           </li>
+           <li class="item item-checkbox">
+               <label class="checkbox">
+                   <input type="checkbox" ng-model="interestsData.mentoring">
+               </label>
+               Mentoring
+           </li>
+           <li class="item item-checkbox">
+           <label class="checkbox">
+               <input type="checkbox" ng-model="interestsData.volunteering">
+           </label>
+               Volunteering
+           </li>
+           <li class="item item-checkbox">
+               <label class="checkbox">
+                   <input type="checkbox" ng-model="interestsData.donations">
+               </label>
+               Other
+           </li>
+  -->          <a class="button button-block button-positive" on-tap="done()"> Add to Interests</a>
+  <p>You are successfully signed up. Please enter your interests</p>
+
+       </ul>
+   </ion-content>
+</ion-view>

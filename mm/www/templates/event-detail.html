@@ -1,0 +1,33 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view >
+  <ion-content class="padding">
+    
+    
+      <div class="card">
+      <div class="item item-divider">
+       <b>{{event.name}} </b> &nbsp; &nbsp; &nbsp;
+       <span class="ion-italic">{{event.eventdate.split('T')[0]}}</span>
+        
+      </div>
+      </div>
+      <div class="item item-image">
+      <img ng-src="{{event.imageUrl}}"> 
+      </div>
+      <p>
+      {{event.eventdesc}}
+      <button class="button button-positive button-block">
+      <span style="padding-right:10%">Sign up for event</span><i class="icon ion-plus"></i></button>
+      <div style="justify-content:center;  -webkit-justify-content: center;-ms-flex-pack: center;-webkit-align-content: center;-ms-flex-line-pack: center;align-content: center;">
+      <button class="button" ng-click="shareAnywhere()"><i class="icon ion-social-facebook"></i></button>
+      <button class="button" ng-click="shareViaTwitter('some message', null, 'http://blog.nraboy.com')"><i class="icon ion-social-twitter"></i></button>
+      <button class="button" ng-click="shareViaTwitter('some message', null, 'http://blog.nraboy.com')"><i class="icon ion-social-linkedin"></i></button>
+      <button class="button" ng-click="shareViaTwitter('some message', null, 'http://blog.nraboy.com')"><i class="icon ion-social-instagram"></i></button>
+      </div>
+    </p>
+  </ion-content>
+</ion-view>

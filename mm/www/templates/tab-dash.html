@@ -1,0 +1,32 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">
+      <a class="item item-icon-right">
+      <i class="icon ion-checkmark-circled"></i>
+      <b>Total # of events attended: </b></a></div>
+      <div class="item item-body">
+        <div>
+            <table align="center"> 
+            <tr ng-repeat ="interest in pastData">
+              <td>{{interest.type}}</td>
+              <td>: &nbsp;<b>{{interest.count}}</b></td>
+            </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">
+      <a class="item item-icon-right">
+      <i class="icon ion-ios-alarm"></i>
+      <b>Ur Up-Coming Events</b></a></div>
+      
+      <div class="card" ng-repeat="event in futureData">
+      <div class="item item-divider">
+        {{event.name}}<br/>
+        {{event.eventdate}}
+      </div>
+      </div>
+  </ion-content>
+</ion-view>

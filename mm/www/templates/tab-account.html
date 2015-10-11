@@ -1,0 +1,56 @@
+<ion-view view-title="Account">
+  <ion-content>
+    <ion-list>
+    <div class="list card">
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-person"></i>
+    {{res1.firstname}}
+  	</a>
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-email"></i>
+    {{res1.emailid}}
+  	</a>
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-ios-telephone"></i>
+    {{res1.phone}}
+  	</a>
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-calendar"></i>
+    {{res1.dob.split('T')[0]}}
+  	</a>
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-home"></i>
+     {{res1.addressline1}}<br/>
+    {{res1.addressline1}}<br/>
+    {{res1.city}}<br/>
+    {{res1.state}} <br/>
+    {{res1.zip}} <br/>
+  	</a>
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-heart"></i>
+    interest 1 <br/>
+    interest 2 <br/>
+    interest 3 <br/>
+  	</a>
+
+  	<a class="item item-icon-left">
+    <i class="icon ion-card"></i>
+    Card details 
+  	</a>
+
+	</div>
+  <button class="button button-block button-positive" on-tap="">
+    Edit Account
+  </button>
+
+
+
+    </ion-list>
+  </ion-content>
+</ion-view>
