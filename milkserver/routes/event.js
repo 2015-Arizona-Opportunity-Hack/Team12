@@ -6,11 +6,11 @@ var connectionString = require(path.join(__dirname, '../', 'config'));
 
 router.post('/', function(req, res) {
 
-    var results = [];
+    var results = []
 
     // Grab data from http request
     var data = {eventname: req.body.eventname,eventdesc: req.body.eventdesc, eventtype: req.body.eventtype,eventdate: req.body.eventdate, duration: req.body.duration};
-
+    console.log(data);
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -43,8 +43,9 @@ router.post('/', function(req, res) {
 
 router.get('/', function(req, res) {
 
-    var results = [];
-
+  var priorityresults = [];
+  var otherresults = [];
+    var getemailid = req.query.emailid;
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -55,17 +56,22 @@ router.get('/', function(req, res) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("SELECT * FROM events ORDER BY eventid DESC;");
+        var query = client.query("select * from events where type in (select type from user_interests where emailid=($1)) and eventid not in (select eventid from user_events where emailid = ($1)) and eventdate > now();", [getemailid]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
-            results.push(row);
+            priorityresults.push(row);
         });
 
+        query = client.query("select * from events where type not in (select type from user_interests where emailid=($1)) and eventid not in (select eventid from user_events where emailid = ($1)) and eventdate > now();", [getemailid]);
+
+        query.on('row', function(row) {
+            otherresults.push(row);
+        });
         // After all data is returned, close connection and return results
         query.on('end', function() {
             done();
-            return res.json(results);
+            return res.json(priorityresults.concat(otherresults));
         });
 
     });

@@ -12,6 +12,8 @@ var loginRoute = require('./routes/login');
 var usereventRoute = require('./routes/userevents');
 var eventRoute = require('./routes/event');
 var dashboardRoute = require('./routes/dashboard');
+var userInterestsRoute = require('./routes/userinterests');
+
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 //Resolve cors prob ionic
@@ -33,6 +35,7 @@ app.use('/login', loginRoute);
 app.use('/event', eventRoute);
 app.use('/userevents', usereventRoute);
 app.use('/dashboard', dashboardRoute);
+app.use('/userinterests', userInterestsRoute);
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 
 

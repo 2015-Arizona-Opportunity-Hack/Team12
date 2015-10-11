@@ -43,12 +43,10 @@ router.get('/', function(req, res) {
         query.on('row', function(row) {
             pastresults.push(row);
         });
-            var json1=futureresults;
-            var json2=pastresults;
         // After all data is returned, close connection and return results
       query.on('end', function() {
             done();
-            return res.json(json1.concat(json2));
+            return res.json(futureresults.concat(pastresults));
         });
 
     });
